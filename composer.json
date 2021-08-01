@@ -3,6 +3,7 @@
         "google/apiclient": "^2.0",
         "google/analytics-data": "^0.5.1",
         "google/cloud": "^0.163.1",
-        "google/cloud-storage": "^1.24"
+        "google/cloud-storage": "^1.24",
+        "google/auth": "^1.16"
     }
 }

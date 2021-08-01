@@ -15,21 +15,9 @@ $property_id = '270164955';
 // Using a default constructor instructs the client to use the credentials
 // specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
 
+putenv('GOOGLE_APPLICATION_CREDENTIALS=/var/www/html/gatest/service-account-credentials.json');
+$client = new BetaAnalyticsDataClient();
 
-  $KEY_FILE_LOCATION = __DIR__ . '/service-account-credentials.json';
-
-  // Create and configure a new client object.
-  $client = new Google_Client();
-  $client->setApplicationName("Hello Analytics Reporting");
-  $client->setAuthConfig($KEY_FILE_LOCATION);
-  $client->setScopes(['https://www.googleapis.com/auth/analytics.readonly']);
-  //$analytics = new Google_Service_AnalyticsReporting($client);
-  //$analytics = new BetaAnalyticsDataClient($client);
-
-  echo "<pre>";
-  var_dump(get_class_methods($client));
-
-  die("cscds");
 
 // Make an API call.
 $response = $client->runReport([
