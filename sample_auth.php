@@ -20,29 +20,36 @@ $response = $client->runReport([
 	],
 	'dimensions' => [
 		new Dimension([
-			'name' => 'customEvent:uid',
+			'name' => 'eventName',
         	]),
 	],
-    	'metrics' => [new Metric([
-            		'name' => 'eventCount',
-        	]),
+	'metrics' => [
+		new Metric(['name' => 'eventCount',]),
+		new Metric(['name' => 'eventCountPerUser',]),
+        	new Metric(['name' => 'activeUsers',]),
+        	new Metric(['name' => 'totalUsers',])
     	]
 ]);
 
 foreach ($response->getRows() as $row) {
     foreach ($row->getDimensionValues() as $dimensionValue) {
-        print 'Dimension Value: ' . $dimensionValue->getValue() . "<br>";
+        print 'Event Name: ' . $dimensionValue->getValue() . "<br>";
     }
+}
+echo "=====================================<br>";
+foreach ($response->getRows() as $row) {
     foreach ($row->getMetricValues() as $metricValue) {
         print 'Metric Value: ' . $metricValue->getValue() . "<br>";
     }
+    echo "=====================================<br>";
 }
+
 
 echo "<pre>";
 echo "===================================================<br>";
 //print_r(get_class_methods($client));
 
-//var_dump($response);
+//var_dump($row->getMetricValues());
 echo "===================================================<br>";
 
 
