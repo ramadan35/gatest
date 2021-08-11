@@ -14,35 +14,44 @@ $response = $client->runReport([
 	'property' => 'properties/270164955',
 	'dateRanges' => [
         	new DateRange([
-            		'start_date' => '30daysAgo',
+            		'start_date' => '28daysAgo',
             		'end_date' => 'today',
         	]),
 	],
 	'dimensions' => [
-		new Dimension([
+//		new Dimension([
+//			'name' => 'customEvent:aid',
+//        	]),
+//      new Dimension([
+//			'name' => 'customEvent:uid',
+//        	]),
+      new Dimension([
+			'name' => 'customEvent:mid',
+        	]),
+      new Dimension([
 			'name' => 'eventName',
         	]),
 	],
 	'metrics' => [
 		new Metric(['name' => 'eventCount',]),
-		new Metric(['name' => 'eventCountPerUser',]),
-        	new Metric(['name' => 'activeUsers',]),
-        	new Metric(['name' => 'totalUsers',])
+        	//new Metric(['name' => 'totalUsers',])
     	]
 ]);
 
 foreach ($response->getRows() as $row) {
     foreach ($row->getDimensionValues() as $dimensionValue) {
-        print 'Event Name: ' . $dimensionValue->getValue() . "<br>";
+        print 'MID: ' . $dimensionValue->getValue() . "<br>";
     }
-}
-echo "=====================================<br>";
-foreach ($response->getRows() as $row) {
+    
+    echo "=====================================<br>";
+    
     foreach ($row->getMetricValues() as $metricValue) {
         print 'Metric Value: ' . $metricValue->getValue() . "<br>";
     }
     echo "=====================================<br>";
 }
+
+
 
 
 echo "<pre>";
